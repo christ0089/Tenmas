@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Factura Pro
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="addRFC()">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h1>Cuentas con que puede Facturar</h1>
+  <ion-slides [options]="sliderConfig" #slides (ionSlideDidChange)="slideChanged()">
+    <ion-slide *ngFor="let rfc of rfcs.rfcArr; let i = index;">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>
+            {{ rfc.rfc }} <br>
+            {{ rfc.name }}
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ngx-qrcode [qrc-value]="rfcs.encodedRFC[i]" class=qrCodeStatus (click)="openEditMode(rfc.rfc)"></ngx-qrcode>
+          <ion-button (click)="scanCodeV2(rfc)" color="danger" shape="round">
+            <ion-icon slot="start" name="barcode"></ion-icon>
+            Usar QR
+          </ion-button>
+          <ion-button (click)="uploadImage(rfc)" color="secondary" shape="round">
+            <ion-icon slot="start" name="camera"></ion-icon>
+            Usar Ticket
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+  <h2>Historial de Facturas</h2>
+  <ion-list *ngIf="histFactura$ | async; let facturas">
+    <ion-item *ngFor="let factura of facturas" [@fadeInMS]>
+      <ion-label>Factura: {{factura.Company}}</ion-label>
+      <p>{{factura.state}}</p>
+    </ion-item>
+  </ion-list>
+</ion-content>

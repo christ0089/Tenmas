@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-back-button style="display: inline-block"></ion-back-button>
+    <ion-title style="display: inline-block">Register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div style="height: 50%;width: 80%; margin: auto; text-align: center; margin-top: 20%; margin-bottom: auto">
+    <form [formGroup]="register" (submit)="registerRFC()">
+      <ion-item>
+        <ion-label position="floating">RFC</ion-label>
+        <ion-input formControlName="rfc"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Razon Social / Nombre de Persona Fisica</ion-label>
+        <ion-input formControlName="razonSocial"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Direccion</ion-label>
+        <ion-input formControlName="location" (ionInput)="updateSearch()"  (ionBlur)="dismiss()"></ion-input>
+      </ion-item>
+      <ion-item *ngFor="let item of autocompleteItems" tappable   (click)="chooseItem(item)">
+        {{ item }}
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Codigo Postal</ion-label>
+        <ion-input formControlName="zip"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Correo del Receptor de Factura</ion-label>
+        <ion-input formControlName="receiver"></ion-input>
+      </ion-item>
+      <div *ngIf="editMode == false; else edit">
+          <ion-button (click)="scanCodeV2()" color="danger" shape="round">
+              <ion-icon slot="start" name="camera"></ion-icon>
+              Agregar por QR
+            </ion-button>
+            <br>
+            <ion-button shape="round" style="font-size: 3.5vw; height: 30px;" type="submit">Enter</ion-button>
+      </div>
+      <ng-template #edit>
+          <ion-button shape="round" type="submit">Guardar</ion-button>
+          <ion-button shape="round" (click)="delete()" color="danger">Borrar</ion-button>
+      </ng-template>
+    </form>
+  </div>
+</ion-content>

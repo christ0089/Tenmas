@@ -1,0 +1,34 @@
+
+ion-content {
+    height: 400px !important;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
+
+@media(max-width: 400px) {
+    ion-card-header {
+        padding-bottom: 5px;
+    }
+    
+    ion-card-title {
+        font-size: 15px;
+    
+    }
+  }
+
+
+
+ion-card-content {
+    button {
+        max-width: calc(100% - 30px);
+        overflow: hidden;
+
+    }
+
+}

@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Facturacion</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-button *ngIf="rfc == null" (click)="scanCodeV2()" color="danger" shape="round" expand="full">
+    <ion-icon slot="start" name="camera"></ion-icon>
+    QR de Cliente
+  </ion-button>
+
+  <div class="holder" *ngIf="rfc != null">
+    <ion-label>Cliente</ion-label>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>
+          {{ rfc?.rfc }} <br>
+          {{ rfc?.name }}
+        </ion-card-title>
+      </ion-card-header>
+    </ion-card>
+  </div>
+  <div class="holder" *ngIf="storeData != null">
+    <ion-label>Informacion de Factura</ion-label>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>
+          {{ rfc?.rfc }} <br>
+          {{ rfc?.name }}
+        </ion-card-title>
+      </ion-card-header>
+    </ion-card>
+  </div>
+  <ion-button shape="round" expand="full" type="submit">Acceptar</ion-button>
+</ion-content>
